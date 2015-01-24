@@ -19,7 +19,7 @@ public class LeafPlatform : MonoBehaviour {
 		leafSquare.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
 
 		TweenParms parms = new TweenParms();
-		parms.Prop("localScale", new Vector3(width, 1.0f, 1.0f));
+		parms.Prop("localScale", new Vector3(width, .5f, .5f));
 		parms.Ease(EaseType.EaseOutBounce);
 
 		HOTween.To(leafSquare.transform, 1, parms);

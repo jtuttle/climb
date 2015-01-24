@@ -100,10 +100,10 @@ public class Vine : MonoBehaviour {
 		LeafPlatform leafPlatform = leafPlatformGo.GetComponent<LeafPlatform>();
 		leafPlatform.Grow(blocks);
 
-		float platformTilt = Random.Range(-10.0f, 10.0f);
+//		float platformTilt = Random.Range(-10.0f, 10.0f);
 
 		leafPlatformGo.transform.localPosition = new Vector2(position, vineHeight);
-		leafPlatformGo.transform.localEulerAngles = new Vector3(0, 0, platformTilt);
+//		leafPlatformGo.transform.localEulerAngles = new Vector3(0, 0, platformTilt);
 
 		_leafPlatforms.Add(leafPlatform);
     }
