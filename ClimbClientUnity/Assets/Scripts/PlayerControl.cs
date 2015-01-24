@@ -52,6 +52,16 @@ public class PlayerControl : MonoBehaviour
 				// The Speed animator parameter is set to the absolute value of the horizontal input.
 				anim.SetFloat ("Speed", Mathf.Abs (h));
 
+		Debug.Log(h);
+
+		if(Mathf.Abs(h) > 0.1f) {
+				anim.SetBool("Running", true);
+				//anim.SetBool("Climbing", false);
+			} else {
+				anim.SetBool("Running", false);
+				//anim.SetBool("Climbing", false);
+			}
+
 				// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
 				if (h * rigidbody2D.velocity.x < maxSpeed)
 			// ... add a force to the player.
@@ -97,6 +107,10 @@ public class PlayerControl : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag.Equals ("Grapple")) {
 			isClimbing = true;
+
+			//anim.SetBool("Climbing", true);
+			//anim.SetBool("Running", false);
+
 			Physics2D.IgnoreLayerCollision(this.gameObject.layer, 8, true);
 			lockedX = other.transform.position.x;
 		}
@@ -105,6 +119,10 @@ public class PlayerControl : MonoBehaviour
 	void OnTriggerExit2D(Collider2D other) {
 		if (other.tag.Equals ("Grapple")) {
 			isClimbing = false;
+
+			//anim.SetBool("Climbing", false);
+			//anim.SetBool("Running", true);
+
 			Physics2D.IgnoreLayerCollision(this.gameObject.layer, 8, false);
 			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
 			rigidbody2D.AddForce(Vector3.up * 2f);
