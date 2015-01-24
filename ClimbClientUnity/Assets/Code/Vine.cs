@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Vine : MonoBehaviour {
-    private int _platformCount = 5;
-
     private List<VineLevel> _vineLevels;
     private List<LeafPlatform> _leafPlatforms;
 
@@ -12,26 +10,33 @@ public class Vine : MonoBehaviour {
 	private int _firstLevelIndex;
 	private int _firstPlatformIndex;
 
+	private int _nextPlatform;
+
 	private bool _move = false;
+	private bool _left = false;
 
 	void Awake() {
         _vineLevels = new List<VineLevel>();
         _leafPlatforms = new List<LeafPlatform>();
 
-		while(_lastLevel == null || _lastLevel.transform.position.y < Camera.main.orthographicSize + 1)
-			Grow();
-
 		_firstLevelIndex = 0;
 		_firstPlatformIndex = 0;
+
+		_nextPlatform = Random.Range(2, 5);
+
+		while(_lastLevel == null || _lastLevel.transform.position.y < Camera.main.orthographicSize - 2)
+			Grow();
 	}
 	
 	void Update () {
-		if(_move) transform.position -= new Vector3(0, 0.02f);
-
-        if(Input.GetKey(KeyCode.Space))
+		if(Input.GetKey(KeyCode.Space))
 			_move = true;
 
-		if(_lastLevel.transform.position.y < Camera.main.orthographicSize + 1)
+		if(!_move) return;
+
+		transform.position -= new Vector3(0, 0.01f);
+
+		if(_lastLevel.transform.position.y < Camera.main.orthographicSize - 2)
 			Grow();
 
 		if(_vineLevels[_firstLevelIndex].transform.position.y < -Camera.main.orthographicSize - 1) {
@@ -55,38 +60,47 @@ public class Vine : MonoBehaviour {
     
     private void Grow() {
         float positionSample = (Mathf.PerlinNoise(_vineLevels.Count / 10.0f, 0) - 0.5f) * 5.0f;
-		//float scaleSample = (Mathf.PerlinNoise(_vineLevels.Count + 200 / 10.0f, 0) - 0.5f) * 5.0f;
+		float scaleSample = Mathf.Max(2.0f, Mathf.PerlinNoise((_vineLevels.Count + 200) / 10.0f, 0) * 4.0f);
 
 		Vector3 oldPos = (_lastLevel == null ? new Vector3(0, 0) : _lastLevel.transform.localPosition);
 
         GameObject newLevelGo = UnityUtils.LoadResource<GameObject>("Prefabs/VineLevel", true);
         newLevelGo.transform.parent = transform;
         newLevelGo.transform.localPosition = new Vector3(positionSample, oldPos.y + 0.5f, 0);
-		//newLevelGo.transform.localScale = new Vector3(scaleSample, 0.5f);
+		newLevelGo.transform.localScale = new Vector3(scaleSample, 0.5f, 1.0f);
 
         VineLevel newLevel = newLevelGo.GetComponent<VineLevel>();
 
         _vineLevels.Add(newLevel);
 		_lastLevel = newLevel;
 
-        newLevel.Grow();
+        newLevel.Grow(scaleSample);
 
-        if(--_platformCount == 0) {
+		if(--_nextPlatform == 0) {
             GrowPlatform(newLevelGo.transform.localPosition.y);
-            _platformCount = 5;
+			_nextPlatform = Random.Range(3, 5);
         }
     }
 
     private void GrowPlatform(float vineHeight) {
-		float position = Random.Range(-4.0f, 4.0f);
-		int blocks = Random.Range(3, 10);
+		float position;
+
+		if(_left)
+			position = Random.Range(-4.0f, -1.5f);
+		else
+			position = Random.Range(1.5f, 4.0f);
+
+		_left = !_left;
+
+		int blocks = Random.Range(5, 8);
 
         GameObject leafPlatformGo = UnityUtils.LoadResource<GameObject>("Prefabs/LeafPlatform", true);
         leafPlatformGo.transform.parent = transform;
-		leafPlatformGo.transform.localPosition = new Vector2(position, vineHeight);
 
 		LeafPlatform leafPlatform = leafPlatformGo.GetComponent<LeafPlatform>();
 		leafPlatform.Grow(blocks);
+
+		leafPlatformGo.transform.localPosition = new Vector2(position, vineHeight);
 
 		_leafPlatforms.Add(leafPlatform);
     }
