@@ -16,7 +16,8 @@ public class PlayerControl : MonoBehaviour
 		public float maxSpeed = 5f;				// The fastest the player can travel in the x axis.
 		public float jumpForce = 10000f;			// Amount of force added when the player jumps.
 
-	private Transform groundCheck;			// A position marking where to check if the player is grounded.
+	private Transform groundCheckLeft;			// A position marking where to check if the player is grounded.
+	private Transform groundCheckRight;
 		private bool grounded = false;			// Whether or not the player is grounded.
 
 	public int controller = 1;
@@ -24,7 +25,8 @@ public class PlayerControl : MonoBehaviour
 		// Use this for initialization
 		void Awake ()
 		{
-				groundCheck = transform.Find("groundCheck");
+				groundCheckLeft = transform.Find("groundCheckLeft");
+		groundCheckRight = transform.Find ("groundCheckRight");
 				anim = GetComponent<Animator> ();
 		print ("test");
 		}
@@ -32,9 +34,7 @@ public class PlayerControl : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
-		Vector2 two = groundCheck.position;
-//			Physics2D.Linecast ( groundCheck.position);
-			grounded = Physics2D.Linecast (transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Platform"));
+			grounded = (Physics2D.Linecast (transform.position, groundCheckLeft.position, 1 << LayerMask.NameToLayer("Platform")) || Physics2D.Linecast (transform.position, groundCheckRight.position, 1 << LayerMask.NameToLayer("Platform")));
 			
 			if (Input.GetButtonDown("Player"+controller+"_Jump") && grounded)
 						jump = true;
