@@ -59,14 +59,15 @@ public class Vine : MonoBehaviour {
     }
     
     private void Grow() {
-        float positionSample = (Mathf.PerlinNoise(_vineLevels.Count / 10.0f, 0) - 0.5f) * 4.0f;
+        float positionXSample = (Mathf.PerlinNoise(_vineLevels.Count / 10.0f, 0) - 0.5f) * 4.0f;
 		float scaleSample = Mathf.Max(2.0f, Mathf.PerlinNoise((_vineLevels.Count + 200) / 10.0f, 0) * 4.0f);
 
 		Vector3 oldPos = (_lastLevel == null ? new Vector3(0, 0) : _lastLevel.transform.localPosition);
 
+
         GameObject newLevelGo = UnityUtils.LoadResource<GameObject>("Prefabs/VineLevel", true);
         newLevelGo.transform.parent = transform;
-        newLevelGo.transform.localPosition = new Vector3(positionSample, oldPos.y + 0.5f, 0);
+		newLevelGo.transform.localPosition = new Vector3(positionXSample, oldPos.y + 0.5f, 0);
 		newLevelGo.transform.localScale = new Vector3(scaleSample, 0.5f, 1.0f);
 
         VineLevel newLevel = newLevelGo.GetComponent<VineLevel>();
@@ -76,21 +77,25 @@ public class Vine : MonoBehaviour {
 
         newLevel.Grow(scaleSample);
 
+
 		if(--_nextPlatform == 0) {
-            GrowPlatform(newLevelGo.transform.localPosition.y);
+			GrowPlatform(newLevelGo.transform.localPosition.y);
 			_nextPlatform = Random.Range(3, 5);
         }
     }
 
     private void GrowPlatform(float vineHeight) {
 		float position;
-
+		float max = 4.0f;
+		float min = 0.8f;
 		if(_left)
-			position = Random.Range(-4.0f, -1.5f);
+			position = Random.Range(-max, -min);
 		else
-			position = Random.Range(1.5f, 4.0f);
+			position = Random.Range(min, max);
 
 		_left = !_left;
+
+		float hModifier = Random.Range (-0.4f, 1.8f);
 
 		int blocks = Random.Range(5, 8);
 
@@ -102,7 +107,7 @@ public class Vine : MonoBehaviour {
 
 //		float platformTilt = Random.Range(-10.0f, 10.0f);
 
-		leafPlatformGo.transform.localPosition = new Vector2(position, vineHeight);
+		leafPlatformGo.transform.localPosition = new Vector2(position, vineHeight + hModifier);
 //		leafPlatformGo.transform.localEulerAngles = new Vector3(0, 0, platformTilt);
 
 		_leafPlatforms.Add(leafPlatform);
