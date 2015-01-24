@@ -26,11 +26,14 @@ public class Vine : MonoBehaviour {
 	}
 
     private void Grow() {
+        float sample = (Mathf.PerlinNoise(_vineLevels.Count / 10.0f, 0) - 0.5f) * 10.0f;
+
         VineLevel lastLevel = _vineLevels[_vineLevels.Count - 1];
+        Vector3 oldPos = lastLevel.transform.localPosition;
 
         GameObject newLevelGo = UnityUtils.LoadResource<GameObject>("Prefabs/VineLevel", true);
         newLevelGo.transform.parent = transform;
-        newLevelGo.transform.localPosition = lastLevel.transform.localPosition + new Vector3(0, 1, 0);
+        newLevelGo.transform.localPosition = new Vector3(sample, oldPos.y + 1, 0);
 
         VineLevel newLevel = newLevelGo.GetComponent<VineLevel>();
 
