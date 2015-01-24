@@ -18,7 +18,7 @@ public class Vine : MonoBehaviour {
         _vineLevels = new List<VineLevel>();
         _leafPlatforms = new List<LeafPlatform>();
 
-		while(_lastLevel == null || _lastLevel.transform.position.y < Camera.main.orthographicSize + 1)
+		while(_lastLevel == null || _lastLevel.transform.position.y < Camera.main.orthographicSize - 2)
 			Grow();
 
 		_firstLevelIndex = 0;
@@ -26,12 +26,14 @@ public class Vine : MonoBehaviour {
 	}
 	
 	void Update () {
-		if(_move) transform.position -= new Vector3(0, 0.02f);
-
-        if(Input.GetKey(KeyCode.Space))
+		if(Input.GetKey(KeyCode.Space))
 			_move = true;
 
-		if(_lastLevel.transform.position.y < Camera.main.orthographicSize + 1)
+		if(!_move) return;
+
+		transform.position -= new Vector3(0, 0.02f);
+
+		if(_lastLevel.transform.position.y < Camera.main.orthographicSize - 2)
 			Grow();
 
 		if(_vineLevels[_firstLevelIndex].transform.position.y < -Camera.main.orthographicSize - 1) {
@@ -55,21 +57,21 @@ public class Vine : MonoBehaviour {
     
     private void Grow() {
         float positionSample = (Mathf.PerlinNoise(_vineLevels.Count / 10.0f, 0) - 0.5f) * 5.0f;
-		//float scaleSample = (Mathf.PerlinNoise(_vineLevels.Count + 200 / 10.0f, 0) - 0.5f) * 5.0f;
+		float scaleSample = Mathf.PerlinNoise((_vineLevels.Count + 200) / 10.0f, 0) * 3.0f;
 
 		Vector3 oldPos = (_lastLevel == null ? new Vector3(0, 0) : _lastLevel.transform.localPosition);
 
         GameObject newLevelGo = UnityUtils.LoadResource<GameObject>("Prefabs/VineLevel", true);
         newLevelGo.transform.parent = transform;
         newLevelGo.transform.localPosition = new Vector3(positionSample, oldPos.y + 0.5f, 0);
-		//newLevelGo.transform.localScale = new Vector3(scaleSample, 0.5f);
+		newLevelGo.transform.localScale = new Vector3(scaleSample, 0.5f, 1.0f);
 
         VineLevel newLevel = newLevelGo.GetComponent<VineLevel>();
 
         _vineLevels.Add(newLevel);
 		_lastLevel = newLevel;
 
-        newLevel.Grow();
+        newLevel.Grow(scaleSample);
 
         if(--_platformCount == 0) {
             GrowPlatform(newLevelGo.transform.localPosition.y);
