@@ -1,0 +1,223 @@
+fileFormatVersion: 2
+guid: 7e43b301332304cfd8b0d5b15f4d21bc
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: climb-PlayerTemplate_ropeclimb1
+    21300002: climb-PlayerTemplate_ropeclimb2
+    21300004: climbup-PlayerTemplate_climbUp
+    21300006: crouch-PlayerTemplate_crouch
+    21300008: idle-PlayerTemplate_idleBounce
+    21300010: idle-PlayerTemplate_neutral
+    21300012: jump-PlayerTemplate_jump
+    21300014: neutral-PlayerTemplate_trueNeutral
+    21300016: punch-PlayerTemplate_punch
+    21300018: run-PlayerTemplate_run1
+    21300020: run-PlayerTemplate_run2
+    21300022: run-PlayerTemplate_run4
+    21300024: run-PlayerTemplaterun_3
+    21300026: sideclimb-PlayerTemplate_sideclimb
+    21300028: stomp-PlayerTemplate_stomp1
+    21300030: stomp-PlayerTemplate_stomp2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: climb-PlayerTemplate_ropeclimb1
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 96
+        width: 15
+        height: 30
+      alignment: 9
+      pivot: {x: .533333361, y: .483333319}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: climb-PlayerTemplate_ropeclimb2
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 40
+        width: 15
+        height: 27
+      alignment: 9
+      pivot: {x: .533333361, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: climbup-PlayerTemplate_climbUp
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 97
+        width: 21
+        height: 29
+      alignment: 9
+      pivot: {x: .523809552, y: .534482777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: crouch-PlayerTemplate_crouch
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 75
+        width: 20
+        height: 22
+      alignment: 9
+      pivot: {x: .5, y: .659090936}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: idle-PlayerTemplate_idleBounce
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 9
+        width: 18
+        height: 27
+      alignment: 9
+      pivot: {x: .555555582, y: .537037015}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: idle-PlayerTemplate_neutral
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 35
+        width: 18
+        height: 28
+      alignment: 9
+      pivot: {x: .555555582, y: .517857134}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: jump-PlayerTemplate_jump
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 65
+        width: 22
+        height: 29
+      alignment: 9
+      pivot: {x: .545454562, y: .534482777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: neutral-PlayerTemplate_trueNeutral
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 34
+        width: 17
+        height: 29
+      alignment: 9
+      pivot: {x: .588235319, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: punch-PlayerTemplate_punch
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 4
+        width: 22
+        height: 28
+      alignment: 9
+      pivot: {x: .454545468, y: .517857134}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: run-PlayerTemplate_run1
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 69
+        width: 22
+        height: 27
+      alignment: 9
+      pivot: {x: .545454562, y: .537037015}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: run-PlayerTemplate_run2
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 98
+        width: 15
+        height: 28
+      alignment: 9
+      pivot: {x: .533333361, y: .517857134}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: run-PlayerTemplate_run4
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 99
+        width: 22
+        height: 27
+      alignment: 9
+      pivot: {x: .5, y: .537037015}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: run-PlayerTemplaterun_3
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 5
+        width: 15
+        height: 28
+      alignment: 9
+      pivot: {x: .533333361, y: .517857134}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sideclimb-PlayerTemplate_sideclimb
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 38
+        width: 23
+        height: 27
+      alignment: 9
+      pivot: {x: .521739125, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stomp-PlayerTemplate_stomp1
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 67
+        width: 17
+        height: 28
+      alignment: 9
+      pivot: {x: .588235319, y: .517857134}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: stomp-PlayerTemplate_stomp2
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 9
+        width: 18
+        height: 27
+      alignment: 9
+      pivot: {x: .555555582, y: .537037015}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

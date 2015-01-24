@@ -1,0 +1,26 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# http://www.codeandweb.com/texturepacker/unity
+#
+# Sprite sheet: Player1.png (128 x 128)
+# $TexturePacker:SmartUpdate:9592324512af0bd6a947cdd329280010:408d818bc1c18052d0180321793863f6:b73d16b07ab69c1854cf82fa263a7771$
+#
+
+climb/PlayerTemplate_ropeclimb1;2;96;15;30;0.5333333333333333;0.4833333333333333
+climb/PlayerTemplate_ropeclimb2;66;40;15;27;0.5333333333333333;0.5
+climbup/PlayerTemplate_climbUp;19;97;21;29;0.5238095238095238;0.5344827586206897
+crouch/PlayerTemplate_crouch;69;75;20;22;0.5;0.6590909090909092
+idle/PlayerTemplate_idleBounce;43;9;18;27;0.5555555555555556;0.537037037037037
+idle/PlayerTemplate_neutral;21;35;18;28;0.5555555555555556;0.5178571428571428
+jump/PlayerTemplate_jump;2;65;22;29;0.5454545454545454;0.5344827586206897
+neutral/PlayerTemplate_trueNeutral;2;34;17;29;0.5882352941176471;0.5
+punch/PlayerTemplate_punch;2;4;22;28;0.45454545454545453;0.5178571428571428
+run/PlayerTemplate_run1;45;69;22;27;0.5454545454545454;0.537037037037037
+run/PlayerTemplate_run2;42;98;15;28;0.5333333333333333;0.5178571428571428
+run/PlayerTemplate_run4;59;99;22;27;0.5;0.537037037037037
+run/PlayerTemplaterun_3;26;5;15;28;0.5333333333333333;0.5178571428571428
+sideclimb/PlayerTemplate_sideclimb;41;38;23;27;0.5217391304347826;0.5
+stomp/PlayerTemplate_stomp1;26;67;17;28;0.5882352941176471;0.5178571428571428
+stomp/PlayerTemplate_stomp2;63;9;18;27;0.5555555555555556;0.537037037037037
