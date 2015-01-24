@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Vine : MonoBehaviour {
-    private bool _grow = false;
-
     private int _platformCount = 5;
 
     private List<VineLevel> _vineLevels;
@@ -13,6 +11,8 @@ public class Vine : MonoBehaviour {
 	private VineLevel _lastLevel;
 	private int _firstLevelIndex;
 	private int _firstPlatformIndex;
+
+	private bool _move = false;
 
 	void Awake() {
         _vineLevels = new List<VineLevel>();
@@ -26,16 +26,10 @@ public class Vine : MonoBehaviour {
 	}
 	
 	void Update () {
-		transform.position -= new Vector3(0, 0.02f);
+		if(_move) transform.position -= new Vector3(0, 0.02f);
 
-        if(Input.GetKey(KeyCode.Space)) {
-            if(!_grow) {
-                _grow = true;
-                Grow();
-            }
-        } else {
-            _grow = false;
-        }
+        if(Input.GetKey(KeyCode.Space))
+			_move = true;
 
 		if(_lastLevel.transform.position.y < Camera.main.orthographicSize + 1)
 			Grow();
