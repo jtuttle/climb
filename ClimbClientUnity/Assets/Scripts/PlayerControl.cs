@@ -23,6 +23,7 @@ public class PlayerControl : MonoBehaviour
 	private bool isClimbing = false;
 	private float lockedX = float.NaN;
 
+
 	public int controller = 1;
 	
 		// Use this for initialization
@@ -99,6 +100,7 @@ public class PlayerControl : MonoBehaviour
 			isClimbing = true;
 			Physics2D.IgnoreLayerCollision(this.gameObject.layer, 8, true);
 			lockedX = other.transform.position.x;
+			rigidbody2D.gravityScale = 0f;
 		}
 	}
 
@@ -107,8 +109,9 @@ public class PlayerControl : MonoBehaviour
 			isClimbing = false;
 			Physics2D.IgnoreLayerCollision(this.gameObject.layer, 8, false);
 			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
-			rigidbody2D.AddForce(Vector3.up * 2f);
+			rigidbody2D.AddForce(Vector3.up * 4f);
 			lockedX = float.NaN;
+			rigidbody2D.gravityScale = 1f;
 		}
 	}
 

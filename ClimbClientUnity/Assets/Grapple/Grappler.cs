@@ -26,6 +26,7 @@ public class Grappler : MonoBehaviour {
 			float distance = hit.point.y - abovePos.y;
 			GameObject gr = Instantiate(grapple, abovePos, Quaternion.identity) as GameObject;
 			gr.transform.localScale = new Vector2(gr.transform.localScale.x, distance);
+			gr.transform.parent = hit.collider.gameObject.transform;
 		}
 	}
 }
