@@ -15,7 +15,7 @@ public class PlayerControl : MonoBehaviour
 		public float moveForce = 40f;			// Amount of force added to move the player left and right.
 		public float maxSpeed = 3f;				// The fastest the player can travel in the x axis.
 		public float jumpForce = 30000f;			// Amount of force added when the player jumps.
-		public float climbForce = 0.1f;
+		public float climbForce = 100000f;
 
 	private Transform groundCheckLeft;			// A position marking where to check if the player is grounded.
 	private Transform groundCheckRight;
@@ -76,6 +76,7 @@ public class PlayerControl : MonoBehaviour
 			float v = Input.GetAxis ("Player"+controller+"_Climb");
 
 			if (isClimbing) {
+				print(v);
 				rigidbody2D.AddForce(Vector3.up * climbForce * v);
 			}
 			if (!float.IsNaN(lockedX)) {
@@ -108,10 +109,11 @@ public class PlayerControl : MonoBehaviour
 		if (other.tag.Equals ("Grapple")) {
 			isClimbing = false;
 			Physics2D.IgnoreLayerCollision(this.gameObject.layer, 8, false);
-			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
-			rigidbody2D.AddForce(Vector3.up * 4f);
+			//rigidbody2D.AddForce(Vector3.up * 5f);
+			transform.Translate(Vector2.up * 0.2f);
 			lockedX = float.NaN;
 			rigidbody2D.gravityScale = 1f;
+			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
 		}
 	}
 

@@ -23,7 +23,7 @@ public class Grappler : MonoBehaviour {
 		Vector2 abovePos = new Vector2 (transform.position.x, transform.position.y + offset);
 		RaycastHit2D hit = Physics2D.Raycast(abovePos, Vector2.up);
 		if (hit.collider != null) {
-			float distance = hit.point.y - abovePos.y;
+			float distance = hit.point.y - abovePos.y - 0.05f;
 			GameObject gr = Instantiate(grapple, abovePos, Quaternion.identity) as GameObject;
 			gr.transform.localScale = new Vector2(gr.transform.localScale.x, distance);
 			gr.transform.parent = hit.collider.gameObject.transform;
