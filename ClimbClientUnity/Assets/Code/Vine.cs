@@ -47,21 +47,21 @@ public class Vine : MonoBehaviour {
         newLevel.Grow();
 
         if(--_platformCount == 0) {
-            GrowPlatform();
+            GrowPlatform(newLevelGo.transform.localPosition.y);
             _platformCount = 5;
         }
     }
 
 
-    private void GrowPlatform() {
-        // random width
-
-        int blocks = Random.Range(3, 5);
-
+    private void GrowPlatform(float vineHeight) {
+		float position = Random.Range(-10.0f, 10.0f);
+		int blocks = Random.Range(3, 8);
 
         GameObject leafPlatformGo = UnityUtils.LoadResource<GameObject>("Prefabs/LeafPlatform", true);
         leafPlatformGo.transform.parent = transform;
-        //leafPlatformGo.transform.localPosition = new Vector3(sample, oldPos.y + 0.5f, 0);
+		leafPlatformGo.transform.localPosition = new Vector2(0, vineHeight);
 
+		LeafPlatform leafPlatform = leafPlatformGo.GetComponent<LeafPlatform>();
+		leafPlatform.Grow(blocks);
     }
 }
