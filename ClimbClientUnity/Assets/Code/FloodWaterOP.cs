@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FloodWater : MonoBehaviour {
+public class FloodWaterOP : MonoBehaviour {
 	//FIELDS
 	int x =0;
 	int waterLevel = 0;
@@ -26,7 +26,7 @@ public class FloodWater : MonoBehaviour {
 			//raise the water to the visible part of the screen
 			transform.Translate(Vector3.up * Time.deltaTime, Space.World);
 			//if(transform.position.y >= -6.91){
-				if(transform.position.y >= -3.91){
+			if(transform.position.y >= -3.91){
 				transform.Translate(Vector3.down *Time.deltaTime, Space.World);
 				waterLevel = 1;
 			}
@@ -36,7 +36,7 @@ public class FloodWater : MonoBehaviour {
 			two = true;		
 			x+=1;
 		}
-
+		
 		if(waterLevel ==1 && two == true) {
 			//raise the water to the visible part of the screen
 			transform.Translate(Vector3.up * Time.deltaTime, Space.World);
@@ -60,8 +60,8 @@ public class FloodWater : MonoBehaviour {
 				waterLevel = 3;
 			}
 		}
-		transform.Translate(Vector3.right * Time.deltaTime, Space.World);
-	
+		transform.Translate(Vector3.left * Time.deltaTime, Space.World);
+		
 	}
 	
 }
