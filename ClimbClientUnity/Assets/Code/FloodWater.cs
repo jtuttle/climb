@@ -8,6 +8,8 @@ public class FloodWater : MonoBehaviour {
 	private bool inputDetected = false;
 	private bool two= false;
 	private bool three= false;
+	private bool left = false;
+	private bool right = true;
 	void Start () {
 		
 	}
@@ -60,8 +62,21 @@ public class FloodWater : MonoBehaviour {
 				waterLevel = 3;
 			}
 		}
-		transform.Translate(Vector3.right * Time.deltaTime, Space.World);
-	
+		if (left == true) {
+			transform.Translate (Vector3.left * Time.deltaTime, Space.World);
+		}
+		if (right == true) {
+			transform.Translate (Vector3.right * Time.deltaTime, Space.World);
+		}
+		if (transform.position.x <= -17.91) {
+			left = false;
+			right = true;
+		}
+		if (transform.position.x >= 17.91) {
+			left = true;
+			right = false;
+		}
+
 	}
 	
 }
