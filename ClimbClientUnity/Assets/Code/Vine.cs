@@ -9,11 +9,11 @@ public class Vine : MonoBehaviour {
 
     private List<VineLevel> _vineLevels;
 
-    private List<VinePlatform> _vinePlatforms;
+    private List<LeafPlatform> _leafPlatforms;
 
 	void Awake() {
         _vineLevels = new List<VineLevel>();
-        _vinePlatforms = new List<VinePlatform>();
+        _leafPlatforms = new List<LeafPlatform>();
 
         GameObject newLevel = UnityUtils.LoadResource<GameObject>("Prefabs/VineLevel", true);
         _vineLevels.Add(newLevel.GetComponent<VineLevel>());
@@ -56,6 +56,12 @@ public class Vine : MonoBehaviour {
     private void GrowPlatform() {
         // random width
 
-        Debug.Log("PLATFORM");
+        int blocks = Random.Range(3, 5);
+
+
+        GameObject leafPlatformGo = UnityUtils.LoadResource<GameObject>("Prefabs/LeafPlatform", true);
+        leafPlatformGo.transform.parent = transform;
+        //leafPlatformGo.transform.localPosition = new Vector3(sample, oldPos.y + 0.5f, 0);
+
     }
 }
