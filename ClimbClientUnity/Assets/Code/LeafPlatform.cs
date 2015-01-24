@@ -12,11 +12,15 @@ public class LeafPlatform : MonoBehaviour {
     public void Grow(int width) {
         GameObject square = UnityUtils.LoadResource<GameObject>("Prefabs/LeafSquare", false);
 
+		float startX = -(width * 0.5f) / 2;
 
-        for
-        
-        square.transform.parent = transform;
-        square.transform.localPosition = Vector3.zero;
-        _leafSquares.Add(square);
+		for(int i = 0; i < width; i++) {
+			GameObject leafSquare = (GameObject)Instantiate(square);
+
+			leafSquare.transform.parent = transform;
+			leafSquare.transform.localPosition = new Vector2(startX + i * 0.5f, 0);
+
+			_leafSquares.Add(leafSquare);
+		}
     }
 }
