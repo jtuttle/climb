@@ -4,9 +4,10 @@ using System.Collections;
 public class FloodWater : MonoBehaviour {
 	//FIELDS
 	int x =0;
-	int y = 0;
+	int waterLevel = 0;
 	private bool inputDetected = false;
-	
+	private bool two= false;
+	private bool three= false;
 	void Start () {
 		
 	}
@@ -21,14 +22,42 @@ public class FloodWater : MonoBehaviour {
 			inputDetected =true;
 			x+=1;
 		}
-		if(y ==0 && inputDetected ==true) {
+		if(waterLevel ==0 && inputDetected ==true) {
 			//raise the water to the visible part of the screen
 			transform.Translate(Vector3.up * Time.deltaTime, Space.World);
-			if(transform.position.y >= -3.91){
+			if(transform.position.y >= -6.91){
 				transform.Translate(Vector3.down *Time.deltaTime, Space.World);
-				y = 1;
+				waterLevel = 1;
 			}
 		}
+		//to be changed for boolean value likely based on time played
+		if (x==1 && Input.GetKey (KeyCode.E)) {
+			two = true;		
+			x+=1;
+		}
+
+		if(waterLevel ==1 && two == true) {
+			//raise the water to the visible part of the screen
+			transform.Translate(Vector3.up * Time.deltaTime, Space.World);
+			if(transform.position.y >= -5.91){
+				transform.Translate(Vector3.down *Time.deltaTime, Space.World);
+				waterLevel = 2;
+			}
+		}
+		if (x==2 && Input.GetKey (KeyCode.R)) {
+			three = true;		
+			x+=1;
+		}
+		
+		if(waterLevel ==2 && three == true) {
+			//raise the water to the visible part of the screen
+			transform.Translate(Vector3.up * Time.deltaTime, Space.World);
+			if(transform.position.y >= -4.91){
+				transform.Translate(Vector3.down *Time.deltaTime, Space.World);
+				waterLevel = 3;
+			}
+		}
+	
 	}
 	
 }
