@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Holoville.HOTween;
 
 public class LeafPlatform : MonoBehaviour {
     private List<GameObject> _leafSquares;
@@ -12,15 +13,17 @@ public class LeafPlatform : MonoBehaviour {
     public void Grow(int width) {
         GameObject square = UnityUtils.LoadResource<GameObject>("Prefabs/LeafSquare", false);
 
-		float startX = -(width * 0.5f) / 2;
+		GameObject leafSquare = (GameObject)Instantiate(square);
 
-		for(int i = 0; i < width; i++) {
-			GameObject leafSquare = (GameObject)Instantiate(square);
+		leafSquare.transform.parent = transform;
+		leafSquare.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
 
-			leafSquare.transform.parent = transform;
-			leafSquare.transform.localPosition = new Vector2(startX + i * 0.5f, 0);
+		TweenParms parms = new TweenParms();
+		parms.Prop("localScale", new Vector3(width, 1.0f, 1.0f));
+		parms.Ease(EaseType.EaseOutBounce);
 
-			_leafSquares.Add(leafSquare);
-		}
+		HOTween.To(leafSquare.transform, 1, parms);
+
+		_leafSquares.Add(leafSquare);
     }
 }
