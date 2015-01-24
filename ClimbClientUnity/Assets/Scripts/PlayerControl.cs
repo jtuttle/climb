@@ -23,6 +23,8 @@ public class PlayerControl : MonoBehaviour
 	private bool isClimbing = false;
 	private float lockedX = float.NaN;
 
+	public int numGrapple = 6;
+
 
 	public int controller = 1;
 	
