@@ -34,7 +34,7 @@ public class Vine : MonoBehaviour {
 
 		if(!_move) return;
 
-		transform.position -= new Vector3(0, 0.01f);
+		transform.position -= new Vector3(0, 0.005f);
 
 		if(_lastLevel.transform.position.y < Camera.main.orthographicSize - 2)
 			Grow();
@@ -100,7 +100,10 @@ public class Vine : MonoBehaviour {
 		LeafPlatform leafPlatform = leafPlatformGo.GetComponent<LeafPlatform>();
 		leafPlatform.Grow(blocks);
 
+		float platformTilt = Random.Range(-10.0f, 10.0f);
+
 		leafPlatformGo.transform.localPosition = new Vector2(position, vineHeight);
+		leafPlatformGo.transform.localEulerAngles = new Vector3(0, 0, platformTilt);
 
 		_leafPlatforms.Add(leafPlatform);
     }

@@ -9,7 +9,7 @@ public class Ground : MonoBehaviour {
 	}
 
 	void Update() {
-		if(_move) transform.position -= new Vector3(0, 0.01f);
+		if(_move) transform.position -= new Vector3(0, 0.005f);
 		
 		if(Input.GetKey(KeyCode.Space))
 			_move = true;
