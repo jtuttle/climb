@@ -28,7 +28,7 @@ public class FloodWater : MonoBehaviour {
 			//raise the water to the visible part of the screen
 			transform.Translate(Vector3.up * Time.deltaTime, Space.World);
 			//if(transform.position.y >= -6.91){
-				if(transform.position.y >= -3.91){
+				if(transform.position.y >= -4.91){
 				transform.Translate((Vector3.down *Time.deltaTime)/10, Space.World);
 				waterLevel = 1;
 			}
@@ -43,7 +43,7 @@ public class FloodWater : MonoBehaviour {
 			//raise the water to the visible part of the screen
 			transform.Translate(Vector3.up * Time.deltaTime, Space.World);
 			//if(transform.position.y >= -5.91){
-			if(transform.position.y >= -2.91){
+			if(transform.position.y >= -3.91){
 				transform.Translate((Vector3.down *Time.deltaTime)/10, Space.World);
 				waterLevel = 2;
 			}
@@ -57,7 +57,7 @@ public class FloodWater : MonoBehaviour {
 			//raise the water to the visible part of the screen
 			transform.Translate(Vector3.up * Time.deltaTime, Space.World);
 			//if(transform.position.y >= -4.91){
-			if(transform.position.y >= -1.91){
+			if(transform.position.y >= -2.91){
 				transform.Translate((Vector3.down *Time.deltaTime)/10, Space.World);
 				waterLevel = 3;
 			}
