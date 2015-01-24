@@ -54,12 +54,12 @@ public class Vine : MonoBehaviour {
 
 
     private void GrowPlatform(float vineHeight) {
-		float position = Random.Range(-10.0f, 10.0f);
+		float position = Random.Range(-4.0f, 4.0f);
 		int blocks = Random.Range(3, 8);
 
         GameObject leafPlatformGo = UnityUtils.LoadResource<GameObject>("Prefabs/LeafPlatform", true);
         leafPlatformGo.transform.parent = transform;
-		leafPlatformGo.transform.localPosition = new Vector2(0, vineHeight);
+		leafPlatformGo.transform.localPosition = new Vector2(position, vineHeight);
 
 		LeafPlatform leafPlatform = leafPlatformGo.GetComponent<LeafPlatform>();
 		leafPlatform.Grow(blocks);
