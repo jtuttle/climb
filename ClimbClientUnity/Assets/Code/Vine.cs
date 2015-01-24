@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Vine : MonoBehaviour {
-    private int _platformCount = 5;
-
     private List<VineLevel> _vineLevels;
     private List<LeafPlatform> _leafPlatforms;
 
@@ -12,17 +10,21 @@ public class Vine : MonoBehaviour {
 	private int _firstLevelIndex;
 	private int _firstPlatformIndex;
 
+	private int _nextPlatform;
+
 	private bool _move = false;
 
 	void Awake() {
         _vineLevels = new List<VineLevel>();
         _leafPlatforms = new List<LeafPlatform>();
 
-		while(_lastLevel == null || _lastLevel.transform.position.y < Camera.main.orthographicSize - 2)
-			Grow();
-
 		_firstLevelIndex = 0;
 		_firstPlatformIndex = 0;
+
+		_nextPlatform = Random.Range(2, 5);
+
+		while(_lastLevel == null || _lastLevel.transform.position.y < Camera.main.orthographicSize - 2)
+			Grow();
 	}
 	
 	void Update () {
@@ -31,7 +33,7 @@ public class Vine : MonoBehaviour {
 
 		if(!_move) return;
 
-		transform.position -= new Vector3(0, 0.02f);
+		transform.position -= new Vector3(0, 0.01f);
 
 		if(_lastLevel.transform.position.y < Camera.main.orthographicSize - 2)
 			Grow();
@@ -73,22 +75,23 @@ public class Vine : MonoBehaviour {
 
         newLevel.Grow(scaleSample);
 
-        if(--_platformCount == 0) {
+		if(--_nextPlatform == 0) {
             GrowPlatform(newLevelGo.transform.localPosition.y);
-            _platformCount = 5;
+			_nextPlatform = Random.Range(2, 5);
         }
     }
 
     private void GrowPlatform(float vineHeight) {
-		float position = Random.Range(-4.0f, 4.0f);
+		float position = Random.Range(-5.0f, 5.0f);
 		int blocks = Random.Range(3, 10);
 
         GameObject leafPlatformGo = UnityUtils.LoadResource<GameObject>("Prefabs/LeafPlatform", true);
         leafPlatformGo.transform.parent = transform;
-		leafPlatformGo.transform.localPosition = new Vector2(position, vineHeight);
 
 		LeafPlatform leafPlatform = leafPlatformGo.GetComponent<LeafPlatform>();
 		leafPlatform.Grow(blocks);
+
+		leafPlatformGo.transform.localPosition = new Vector2(position, vineHeight);
 
 		_leafPlatforms.Add(leafPlatform);
     }
