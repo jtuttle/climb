@@ -15,10 +15,13 @@ public class PlayerControl : MonoBehaviour
 		public float moveForce = 40f;			// Amount of force added to move the player left and right.
 		public float maxSpeed = 3f;				// The fastest the player can travel in the x axis.
 		public float jumpForce = 30000f;			// Amount of force added when the player jumps.
+		public float climbForce = 0.1f;
 
 	private Transform groundCheckLeft;			// A position marking where to check if the player is grounded.
 	private Transform groundCheckRight;
 		private bool grounded = false;			// Whether or not the player is grounded.
+	private bool isClimbing = false;
+	private float lockedX = float.NaN;
 
 	public int controller = 1;
 	
@@ -68,6 +71,16 @@ public class PlayerControl : MonoBehaviour
 						rigidbody2D.AddForce (new Vector2 (0f, jumpForce));
 						jump = false;
 				}
+
+			float v = Input.GetAxis ("Player"+controller+"_Climb");
+
+			if (isClimbing) {
+				rigidbody2D.AddForce(Vector3.up * climbForce * v);
+			}
+			if (!float.IsNaN(lockedX)) {
+				transform.position = new Vector2(lockedX, transform.position.y);
+			}
+
 		}
 
 	void Flip ()
@@ -79,6 +92,24 @@ public class PlayerControl : MonoBehaviour
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
+	}
+
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.tag.Equals ("Grapple")) {
+			isClimbing = true;
+			Physics2D.IgnoreLayerCollision(this.gameObject.layer, 8, true);
+			lockedX = other.transform.position.x;
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D other) {
+		if (other.tag.Equals ("Grapple")) {
+			isClimbing = false;
+			Physics2D.IgnoreLayerCollision(this.gameObject.layer, 8, false);
+			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
+			rigidbody2D.AddForce(Vector3.up * 2f);
+			lockedX = float.NaN;
+		}
 	}
 
 }
