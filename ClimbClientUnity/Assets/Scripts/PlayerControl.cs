@@ -12,9 +12,9 @@ public class PlayerControl : MonoBehaviour
 				jump = false;				// Condition for whether the player should jump.
 
 		private Animator anim;
-		public float moveForce = 30f;			// Amount of force added to move the player left and right.
-		public float maxSpeed = 5f;				// The fastest the player can travel in the x axis.
-		public float jumpForce = 10000f;			// Amount of force added when the player jumps.
+		public float moveForce = 40f;			// Amount of force added to move the player left and right.
+		public float maxSpeed = 3f;				// The fastest the player can travel in the x axis.
+		public float jumpForce = 30000f;			// Amount of force added when the player jumps.
 
 	private Transform groundCheckLeft;			// A position marking where to check if the player is grounded.
 	private Transform groundCheckRight;

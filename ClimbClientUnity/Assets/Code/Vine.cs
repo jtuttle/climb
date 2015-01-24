@@ -59,7 +59,7 @@ public class Vine : MonoBehaviour {
     }
     
     private void Grow() {
-        float positionSample = (Mathf.PerlinNoise(_vineLevels.Count / 10.0f, 0) - 0.5f) * 5.0f;
+        float positionSample = (Mathf.PerlinNoise(_vineLevels.Count / 10.0f, 0) - 0.5f) * 4.0f;
 		float scaleSample = Mathf.Max(2.0f, Mathf.PerlinNoise((_vineLevels.Count + 200) / 10.0f, 0) * 4.0f);
 
 		Vector3 oldPos = (_lastLevel == null ? new Vector3(0, 0) : _lastLevel.transform.localPosition);
@@ -100,10 +100,10 @@ public class Vine : MonoBehaviour {
 		LeafPlatform leafPlatform = leafPlatformGo.GetComponent<LeafPlatform>();
 		leafPlatform.Grow(blocks);
 
-		float platformTilt = Random.Range(-10.0f, 10.0f);
+//		float platformTilt = Random.Range(-10.0f, 10.0f);
 
 		leafPlatformGo.transform.localPosition = new Vector2(position, vineHeight);
-		leafPlatformGo.transform.localEulerAngles = new Vector3(0, 0, platformTilt);
+//		leafPlatformGo.transform.localEulerAngles = new Vector3(0, 0, platformTilt);
 
 		_leafPlatforms.Add(leafPlatform);
     }
