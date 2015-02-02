@@ -20,6 +20,7 @@ public class FloodWater : MonoBehaviour {
 		//input detected from the user
 		
 		//need to find out what input will look like
+		/*
 		if(x==0 && Input.anyKey ){
 			inputDetected =true;
 			x+=1;
@@ -58,21 +59,23 @@ public class FloodWater : MonoBehaviour {
 			transform.Translate(Vector3.up * Time.deltaTime, Space.World);
 			//if(transform.position.y >= -4.91){
 			if(transform.position.y >= -2.91){
-				transform.Translate((Vector3.down *Time.deltaTime)/10, Space.World);
+				transform.Translate((Vector3.down *Time.deltaTime) / 10, Space.World);
 				waterLevel = 3;
 			}
 		}
+		*/
+
 		if (left == true) {
-			transform.Translate (Vector3.left * 2*Time.deltaTime, Space.World);
+			transform.Translate (Vector3.left * 2 * Time.deltaTime, Space.World);
 		}
 		if (right == true) {
-			transform.Translate (Vector3.right * 2*Time.deltaTime, Space.World);
+			transform.Translate (Vector3.right * 2 * Time.deltaTime, Space.World);
 		}
-		if (transform.position.x <= -17.91) {
+		if (transform.position.x <= -13) {
 			left = false;
 			right = true;
 		}
-		if (transform.position.x >= 17.91) {
+		if (transform.position.x >= 13) {
 			left = true;
 			right = false;
 		}
