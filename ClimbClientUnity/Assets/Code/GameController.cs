@@ -35,4 +35,9 @@ public class GameController : MonoBehaviour {
 			}
 		}
 	}
+
+	void OnGUI() {
+		GUI.Label(new Rect(10, 10, 100, 20), "Space = Start");
+		GUI.Label(new Rect(10, 30, 100, 20), "R = Reset");
+	}
 }
