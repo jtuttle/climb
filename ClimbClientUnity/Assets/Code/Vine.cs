@@ -16,22 +16,10 @@ public class Vine : MonoBehaviour {
     private bool _left = false;
 
     void Awake() {
-        _vineLevels = new List<VineLevel>();
-        _leafPlatforms = new List<LeafPlatform>();
-
-        _firstLevelIndex = 0;
-        _firstPlatformIndex = 0;
-
-        _nextPlatform = Random.Range(2, 5);
-
-        while(_lastLevel == null || _lastLevel.transform.position.y < Camera.main.orthographicSize - 2)
-            Grow();
+		Reset();
     }
-    
-    void Update () {
-        if(Input.GetKey(KeyCode.Space))
-            _move = true;
 
+    void Update () {
         if(!_move) return;
 
         transform.position -= new Vector3(0, 0.005f);
@@ -57,13 +45,48 @@ public class Vine : MonoBehaviour {
             _firstPlatformIndex++;
         }
     }
+
+	public void Begin() {
+		_move = true;
+	}
+
+	public void Reset() {
+		_move = false;
+
+		if(_vineLevels != null) {
+			foreach(VineLevel level in _vineLevels) {
+				if(level != null)
+					GameObject.Destroy(level.gameObject);
+			}
+		}
+		
+		if(_leafPlatforms != null) {
+			foreach(LeafPlatform platform in _leafPlatforms) {
+				if(platform != null)
+					GameObject.Destroy(platform.gameObject);
+			}
+		}
+		
+		_vineLevels = new List<VineLevel>();
+		_leafPlatforms = new List<LeafPlatform>();
+		
+		_firstLevelIndex = 0;
+		_firstPlatformIndex = 0;
+		_lastLevel = null;
+		
+		_nextPlatform = Random.Range(2, 5);
+
+		transform.position = new Vector3(0, -4, 0);
+
+		while(_lastLevel == null || _lastLevel.transform.position.y < Camera.main.orthographicSize - 2)
+			Grow();
+	}
     
     private void Grow() {
         float positionXSample = (Mathf.PerlinNoise(_vineLevels.Count / 10.0f, 0) - 0.5f) * 4.0f;
         float scaleSample = Mathf.Max(2.0f, Mathf.PerlinNoise((_vineLevels.Count + 200) / 10.0f, 0) * 4.0f);
 
         Vector3 oldPos = (_lastLevel == null ? new Vector3(0, 0) : _lastLevel.transform.localPosition);
-
 
         GameObject newLevelGo = UnityUtils.LoadResource<GameObject>("Prefabs/VineLevel", true);
         newLevelGo.transform.parent = transform;
@@ -76,7 +99,6 @@ public class Vine : MonoBehaviour {
         _lastLevel = newLevel;
 
         newLevel.Grow(scaleSample);
-
 
         if(--_nextPlatform == 0) {
             GrowPlatform(newLevelGo.transform.localPosition.y);

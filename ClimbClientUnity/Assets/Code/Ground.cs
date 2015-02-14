@@ -4,14 +4,21 @@ using System.Collections;
 public class Ground : MonoBehaviour {
 	private bool _move = false;
 
-	void Start() {
-	
-	}
+
 
 	void Update() {
-		if(_move) transform.position -= new Vector3(0, 0.005f);
-		
-		if(Input.GetKey(KeyCode.Space))
-			_move = true;
+		if(!_move) return;
+
+		transform.position -= new Vector3(0, 0.005f);
+	}
+
+	public void Begin() {
+		_move = true;
+	}
+	 
+	public void Reset() {
+		_move = false;
+
+		transform.position = new Vector3(0, -18.5f, 0);
 	}
 }
