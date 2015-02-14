@@ -71,11 +71,11 @@ public class FloodWater : MonoBehaviour {
 		if (right == true) {
 			transform.Translate (Vector3.right * 2 * Time.deltaTime, Space.World);
 		}
-		if (transform.position.x <= -13) {
+		if (transform.position.x <= -12) {
 			left = false;
 			right = true;
 		}
-		if (transform.position.x >= 13) {
+		if (transform.position.x >= 12) {
 			left = true;
 			right = false;
 		}
