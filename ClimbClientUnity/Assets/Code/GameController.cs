@@ -67,7 +67,7 @@ public class GameController : MonoBehaviour {
 
 		if(_victorName != null) {
 			int width = 250;
-			Rect rect = new Rect((Screen.width - width) / 2, 10, width, 50);
+			Rect rect = new Rect((Screen.width - width) / 2, 0, width, 50);
 
 			GUI.Label(rect, _victorName + " wins!", _victorStyle);
 		}
@@ -91,6 +91,7 @@ public class GameController : MonoBehaviour {
 
 		if(aliveCount == 1) {
 			_victorName = alive.name;
+			_victorStyle.normal.textColor = alive.GetComponent<SpriteRenderer>().color;
 		} else if(aliveCount == 0) {
 			_victorName = "Nobody";
 		}
