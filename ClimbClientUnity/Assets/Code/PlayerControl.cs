@@ -23,15 +23,28 @@ public class PlayerControl : MonoBehaviour {
 	
     public int controller = 1;
     
+	private AudioSource _audioSource;
+	public AudioClip JumpSound;
+	public AudioClip DeathSound;
+
+	private Vector3 _startPos;
+	private bool _dead;
+
     void Awake() {
         groundCheckLeft = transform.Find("groundCheckLeft");
         groundCheckRight = transform.Find ("groundCheckRight");
 
+		_startPos = transform.position;
+
         //anim = GetComponent<Animator> ();
+
+		_audioSource = GetComponent<AudioSource>();
     }
     
     // Update is called once per frame
     void Update() {
+		if(_dead) return;
+
         grounded = (Physics2D.Linecast (transform.position, groundCheckLeft.position, 1 << LayerMask.NameToLayer("Platform")) || Physics2D.Linecast (transform.position, groundCheckRight.position, 1 << LayerMask.NameToLayer("Platform")));
             
         if(Input.GetButtonDown("Player"+controller+"_Jump") && grounded)
@@ -87,14 +100,9 @@ public class PlayerControl : MonoBehaviour {
         }
     }
 
-    void Flip () {
-        // Switch the way the player is labelled as facing.
-        facingRight = !facingRight;
-        
-        // Multiply the player's x local scale by -1.
-    	Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
+	public void Reset() {
+		transform.position = _startPos;
+		_dead = false;
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
@@ -118,4 +126,22 @@ public class PlayerControl : MonoBehaviour {
 		}
 	}
 
+	private void Flip() {
+		// Switch the way the player is labelled as facing.
+		facingRight = !facingRight;
+		
+		// Multiply the player's x local scale by -1.
+		Vector3 theScale = transform.localScale;
+		theScale.x *= -1;
+		transform.localScale = theScale;
+	}
+
+	public bool IsDead() {
+		return _dead;
+	}
+	
+	public void Die() {
+		_audioSource.PlayOneShot(DeathSound);
+		_dead = true;
+	}
 }

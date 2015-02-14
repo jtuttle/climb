@@ -15,6 +15,10 @@ public class Ground : MonoBehaviour {
 	public void Begin() {
 		_move = true;
 	}
+
+	public void Stop() {
+		_move = false;
+	}
 	 
 	public void Reset() {
 		_move = false;
