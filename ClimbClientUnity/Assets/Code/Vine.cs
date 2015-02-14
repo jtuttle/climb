@@ -50,6 +50,10 @@ public class Vine : MonoBehaviour {
 		_move = true;
 	}
 
+	public void Stop() {
+		_move = false;
+	}
+
 	public void Reset() {
 		_move = false;
 
