@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour {
 	private List<PlayerControl> _players;
 
 	private string _victorName;
+
+	private GUIStyle _instructStyle;
 	private GUIStyle _victorStyle;
 
 	void Start() {
@@ -20,6 +22,10 @@ public class GameController : MonoBehaviour {
 		_players.Add(GameObject.Find("Player 2").GetComponent<PlayerControl>());
 		_players.Add(GameObject.Find("Player 3").GetComponent<PlayerControl>());
 		_players.Add(GameObject.Find("Player 4").GetComponent<PlayerControl>());
+
+		_instructStyle = new GUIStyle();
+		_instructStyle.fontStyle = FontStyle.Bold;
+		_instructStyle.normal.textColor = Color.white;
 
 		_victorStyle = new GUIStyle();
 		_victorStyle.fontSize = 28;
@@ -51,8 +57,13 @@ public class GameController : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		GUI.Label(new Rect(10, 10, 100, 20), "Space = Start");
-		GUI.Label(new Rect(10, 30, 100, 20), "R = Reset");
+		GUI.Label(new Rect(Screen.width - 100, 10, 100, 20), "Keyboard", _instructStyle);
+		GUI.Label(new Rect(Screen.width - 100, 30, 100, 20), "Space = Start", _instructStyle);
+		GUI.Label(new Rect(Screen.width - 100, 50, 100, 20), "R = Reset", _instructStyle);
+
+		GUI.Label(new Rect(10, 10, 100, 20), "Gamepad", _instructStyle);
+		GUI.Label(new Rect(10, 30, 100, 20), "Left Stick = Move", _instructStyle);
+		GUI.Label(new Rect(10, 50, 100, 20), "A = Jump", _instructStyle);
 
 		if(_victorName != null) {
 			int width = 250;
