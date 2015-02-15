@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
+using XboxCtrlrInput;
 
 public class PlayerControl : MonoBehaviour {
     [HideInInspector]
@@ -47,9 +48,10 @@ public class PlayerControl : MonoBehaviour {
 
         grounded = (Physics2D.Linecast (transform.position, groundCheckLeft.position, 1 << LayerMask.NameToLayer("Platform")) || Physics2D.Linecast (transform.position, groundCheckRight.position, 1 << LayerMask.NameToLayer("Platform")));
             
-        if(Input.GetButtonDown("Player"+controller+"_Jump") && grounded)
+		if(XCI.GetButton(XboxButton.A, controller) && grounded) {
+			_audioSource.PlayOneShot(JumpSound);
             jump = true;
-
+		}
 
         float horzExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
 
@@ -63,7 +65,7 @@ public class PlayerControl : MonoBehaviour {
 
     void FixedUpdate() {
         // Cache the horizontal input.
-        float h = Input.GetAxis ("Player"+controller+"_Move_Horizontal");
+		float h = XCI.GetAxis(XboxAxis.LeftStickX, controller);
         
         // The Speed animator parameter is set to the absolute value of the horizontal input.
         //anim.SetFloat ("Speed", Mathf.Abs (h));
@@ -84,10 +86,11 @@ public class PlayerControl : MonoBehaviour {
             Flip();
 
         if(jump) {
-            rigidbody2D.AddForce (new Vector2 (0f, jumpForce));
+            rigidbody2D.AddForce(new Vector2 (0f, jumpForce));
             jump = false;
         }
 
+		/*
         float v = Input.GetAxis ("Player"+controller+"_Climb");
 
         if (isClimbing) {
@@ -98,6 +101,7 @@ public class PlayerControl : MonoBehaviour {
         if(!float.IsNaN(lockedX)) {
             transform.position = new Vector2(lockedX, transform.position.y);
         }
+        */
     }
 
 	public void Reset() {

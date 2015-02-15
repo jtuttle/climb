@@ -11,7 +11,9 @@ public class FloodWater : MonoBehaviour {
 	private bool three= false;
 	*/
 
-	private bool left = false;
+	public float WaveSpeed = 5.0f;
+
+	private bool _left = false;
 
 	// Update is called once per frame
 	void Update () {
@@ -64,14 +66,14 @@ public class FloodWater : MonoBehaviour {
 		}
 		*/
 
-		if(left) {
+		if(_left) {
 			//transform.Translate(Vector3.left * 2 * Time.deltaTime, Space.World);
-			transform.position -= new Vector3(0.04f, 0);
-			if(transform.position.x <= -12) left = !left;
+			transform.position -= new Vector3(WaveSpeed, 0) * Time.deltaTime;
+			if(transform.position.x <= -12) _left = !_left;
 		} else {
 			//transform.Translate(Vector3.right * 2 * Time.deltaTime, Space.World);
-			transform.position += new Vector3(0.04f, 0);
-			if(transform.position.x >= 12) left = !left;
+			transform.position += new Vector3(WaveSpeed, 0) * Time.deltaTime;;
+			if(transform.position.x >= 12) _left = !_left;
 		}
 	}
 	

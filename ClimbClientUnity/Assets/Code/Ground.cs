@@ -9,7 +9,7 @@ public class Ground : MonoBehaviour {
 	void Update() {
 		if(!_move) return;
 
-		transform.position -= new Vector3(0, 0.005f);
+		transform.position -= new Vector3(0, 0.5f) * Time.deltaTime;
 	}
 
 	public void Begin() {
