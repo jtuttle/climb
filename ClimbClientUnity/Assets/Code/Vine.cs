@@ -22,7 +22,7 @@ public class Vine : MonoBehaviour {
     void Update () {
         if(!_move) return;
 
-        transform.position -= new Vector3(0, 0.005f);
+		transform.position -= new Vector3(0, 0.4f) * Time.deltaTime;
 
         if(_lastLevel.transform.position.y < Camera.main.orthographicSize - 2)
             Grow();
