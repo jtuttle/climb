@@ -48,7 +48,7 @@ public class PlayerControl : MonoBehaviour {
 
         grounded = (Physics2D.Linecast (transform.position, groundCheckLeft.position, 1 << LayerMask.NameToLayer("Platform")) || Physics2D.Linecast (transform.position, groundCheckRight.position, 1 << LayerMask.NameToLayer("Platform")));
             
-		if(XCI.GetButton(XboxButton.A, controller) && grounded) {
+		if(XCI.GetButton(XboxButton.A, controller) && !jump && grounded) {
 			_audioSource.PlayOneShot(JumpSound);
             jump = true;
 		}
