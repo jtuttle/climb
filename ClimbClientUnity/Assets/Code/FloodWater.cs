@@ -3,17 +3,16 @@ using System.Collections;
 
 public class FloodWater : MonoBehaviour {
 	//FIELDS
-	int x =0;
+	/*
+	int x = 0;
 	int waterLevel = 0;
 	private bool inputDetected = false;
 	private bool two= false;
 	private bool three= false;
+	*/
+
 	private bool left = false;
-	private bool right = true;
-	void Start () {
-		
-	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		//will need code raise the water 1/6 the way up the screen once there is 
@@ -65,21 +64,15 @@ public class FloodWater : MonoBehaviour {
 		}
 		*/
 
-		if (left == true) {
-			transform.Translate (Vector3.left * 2 * Time.deltaTime, Space.World);
+		if(left) {
+			//transform.Translate(Vector3.left * 2 * Time.deltaTime, Space.World);
+			transform.position -= new Vector3(0.04f, 0);
+			if(transform.position.x <= -12) left = !left;
+		} else {
+			//transform.Translate(Vector3.right * 2 * Time.deltaTime, Space.World);
+			transform.position += new Vector3(0.04f, 0);
+			if(transform.position.x >= 12) left = !left;
 		}
-		if (right == true) {
-			transform.Translate (Vector3.right * 2 * Time.deltaTime, Space.World);
-		}
-		if (transform.position.x <= -12) {
-			left = false;
-			right = true;
-		}
-		if (transform.position.x >= 12) {
-			left = true;
-			right = false;
-		}
-
 	}
 	
 }
